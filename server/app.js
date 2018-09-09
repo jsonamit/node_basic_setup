@@ -1,14 +1,11 @@
-/**
- * Created by Amit on 9/8/2018.
- */
+var express=require('express');
+var app=express();
+var routes=require('./routes');
 
-const http = require('http');
-const express = require('express');
-const app = express();
+app.get('/',routes.index);
+app.get('/hello',routes.hello);
 
-const server = http.createServer(app).listen(8000);
 
-console.log('Server is running on 8000 port');
-
-module.exports = server;
-
+var server=app.listen(3000,()=>{
+    console.log('port listen 3000');
+});
