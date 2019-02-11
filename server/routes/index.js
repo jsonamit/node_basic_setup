@@ -1,10 +1,10 @@
-exports.index=(req,res)=>{
-    res.send("this is default route");
-}
-exports.hello=(req,res)=>{
-    res.send("this is hello route");
-}
-exports.withname=(req,res)=>{
-    var name=req.params.name;
-    res.send(name +"  this is hello route");
+const user = require('./user/user.route');
+
+module.exports = (app) => {
+  app.use('/api/user/', user);
+  app.use((e, req, res, next) => {
+    if (!next) return null;
+    const err = e;
+    return res.status(500).json({ message: err.message, stack: err.stack });
+  });
 }
